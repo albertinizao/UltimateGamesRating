@@ -15,6 +15,8 @@ import java.io.Serializable;
 @ApiModel(value = "Videogame", description = "All the information about the videogame")
 public class Videogame implements Comparable<Videogame>, Serializable {
 
+    public static final String SEQUENCE_NAME = "SEC_VIDEOGAME";
+
     @ApiModelProperty(value = "The id of the game", required = true, example = "1")
     @Id
     public Integer id;
