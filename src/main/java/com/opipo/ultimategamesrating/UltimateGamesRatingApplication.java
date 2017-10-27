@@ -57,7 +57,7 @@ public class UltimateGamesRatingApplication {
 	@Value("${app.contact.name:Alberto Cebrian Medialdea}")
 	private String contactName;
 
-	@Value("${app.contact.url:https://github.com/albertinizao/junit-pojo}")
+	@Value("${app.contact.url:https://github.com/albertinizao/UltimateGamesRating}")
 	private String contactUrl;
 
 	@Value("${app.contact.email:albertocebrianmedialdea@gmail.com}")
