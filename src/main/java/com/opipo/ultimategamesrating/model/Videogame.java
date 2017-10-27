@@ -15,10 +15,21 @@ import java.io.Serializable;
 @ApiModel(value = "Videogame", description = "All the information about the videogame")
 public class Videogame implements Comparable<Videogame>, Serializable {
 
+    @ApiModelProperty(value = "The id of the game", required = true, example = "1")
     @Id
+    public Integer id;
+
     @ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
     @NotEmpty
     public String name;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -31,6 +42,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @Override
     public int hashCode() {
         final HashCodeBuilder hcb = new HashCodeBuilder();
+        hcb.append(getId());
         hcb.append(getName());
         return hcb.toHashCode();
     }
@@ -42,6 +54,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
         }
         final Videogame other = (Videogame) object;
         final EqualsBuilder eqb = new EqualsBuilder();
+        eqb.append(this.getId(), other.getId());
         eqb.append(this.getName(), other.getName());
         return eqb.isEquals();
     }
@@ -49,6 +62,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @Override
     public int compareTo(Videogame other) {
         final CompareToBuilder ctb = new CompareToBuilder();
+        ctb.append(this.getId(), other.getId());
         ctb.append(this.getName(), other.getName());
         return ctb.toComparison();
     }
