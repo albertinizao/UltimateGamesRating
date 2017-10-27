@@ -1,9 +1,14 @@
 package com.opipo.ultimategamesrating.service;
 
+import com.opipo.ultimategamesrating.MockitoExtension;
 import com.opipo.ultimategamesrating.service.impl.AbstractServiceDTO;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.io.Serializable;
@@ -14,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
 
     protected abstract MongoRepository<T, ID> getRepository();
@@ -31,6 +37,11 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
     public abstract Class<T> getElementClass();
 
     public abstract void mockIdGeneration();
+
+    @BeforeEach
+    public void init(){
+        MockitoAnnotations.initMocks(getService());
+    }
 
     public void initFindCorrect(T element, ID id) {
         Mockito.when(getRepository().findById(id)).thenReturn(Optional.of(element));
