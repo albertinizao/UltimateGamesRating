@@ -6,7 +6,9 @@ import com.opipo.ultimategamesrating.service.SequenceService;
 import com.opipo.ultimategamesrating.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VideogameServiceImpl extends AbstractServiceDTO<Videogame, Integer> implements VideogameService {
     @Autowired
     private VideogameRepository videogameRepository;

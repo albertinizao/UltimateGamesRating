@@ -1,7 +1,9 @@
 package com.opipo.ultimategamesrating.controller;
 
+import com.opipo.ultimategamesrating.MockitoExtension;
 import com.opipo.ultimategamesrating.service.ServiceDTOInterface;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 public abstract class AbstractCRUDControllerTest<T, ID extends Serializable> {
     abstract AbstractCRUDController<T, ID> getController();
 
