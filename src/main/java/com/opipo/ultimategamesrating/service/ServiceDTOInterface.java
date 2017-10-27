@@ -1,4 +1,4 @@
-package com.opipo.ultimategamesrating.services;
+package com.opipo.ultimategamesrating.service;
 
 import java.io.Serializable;
 import java.util.Collection;
