@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
-public class VideogameControllerTest extends AbstractCRUDControllerTest<Videogame, Integer> {
+public class VideogameControllerTest extends AbstractCRUDControllerTest<Videogame, String> {
 
     @InjectMocks
     private VideogameController controller = new VideogameController();
@@ -16,29 +16,29 @@ public class VideogameControllerTest extends AbstractCRUDControllerTest<Videogam
     private VideogameService service;
 
     @Override
-    AbstractCRUDController<Videogame, Integer> getController() {
+    AbstractCRUDController<Videogame, String> getController() {
         return controller;
     }
 
     @Override
-    ServiceDTOInterface<Videogame, Integer> getService() {
+    ServiceDTOInterface<Videogame, String> getService() {
         return service;
     }
 
     @Override
-    Integer getCorrectID() {
-        return 1;
+    String getCorrectID() {
+        return "1";
     }
 
     @Override
-    Integer getIncorrectID() {
-        return 2;
+    String getIncorrectID() {
+        return "2";
     }
 
     @Override
-    Videogame buildElement(Integer id) {
+    Videogame buildElement(String name) {
         Videogame videogame = new Videogame();
-        videogame.setId(id);
+        videogame.setName(name);
         return videogame;
     }
 }

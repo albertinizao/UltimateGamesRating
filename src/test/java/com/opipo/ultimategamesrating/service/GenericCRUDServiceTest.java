@@ -2,7 +2,6 @@ package com.opipo.ultimategamesrating.service;
 
 import com.opipo.ultimategamesrating.MockitoExtension;
 import com.opipo.ultimategamesrating.service.impl.AbstractServiceDTO;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -150,7 +149,7 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
         whenCreation(false);
     }
 
-    private void whenCreation(Boolean useId) {
+    protected void whenCreation(Boolean useId) {
         ID id = getCorrectID();
         T expected = buildExpectedElement(id);
         Mockito.when(getRepository().save(Mockito.any(getElementClass()))).thenReturn(expected);

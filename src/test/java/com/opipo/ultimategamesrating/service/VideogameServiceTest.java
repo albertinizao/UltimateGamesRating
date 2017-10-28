@@ -4,57 +4,57 @@ import com.opipo.ultimategamesrating.model.Videogame;
 import com.opipo.ultimategamesrating.repository.VideogameRepository;
 import com.opipo.ultimategamesrating.service.impl.AbstractServiceDTO;
 import com.opipo.ultimategamesrating.service.impl.VideogameServiceImpl;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, Integer> {
+
+public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, String> {
     @InjectMocks
     private VideogameServiceImpl service;
 
     @Mock
     private VideogameRepository repository;
 
-    @Mock
-    private SequenceService secuenceService;
-
     @Override
-    protected MongoRepository<Videogame, Integer> getRepository() {
+    protected MongoRepository<Videogame, String> getRepository() {
         return repository;
     }
 
     @Override
-    protected AbstractServiceDTO<Videogame, Integer> getService() {
+    protected AbstractServiceDTO<Videogame, String> getService() {
         return service;
     }
 
     @Override
-    public Integer getCorrectID() {
-        return 2;
+    public String getCorrectID() {
+        return "2";
     }
 
     @Override
-    public Integer getIncorrectCorrectID() {
-        return 3333;
+    public String getIncorrectCorrectID() {
+        return "3333";
     }
 
     @Override
-    public Videogame buildExpectedElement(Integer id, Object... params) {
+    public Videogame buildExpectedElement(String name, Object... params) {
         Videogame videogame = new Videogame();
-        videogame.setId(id);
-        if (params!=null && params.length>0){
-            videogame.setName((String)params[1]);
+        videogame.setName(name);
+        if (params != null && params.length > 0) {
+            videogame.setName((String) params[1]);
         }
         return videogame;
     }
 
     @Override
-    public void initFindCorrect(Integer id) {
+    public void initFindCorrect(String name) {
         Videogame videogame = new Videogame();
-        videogame.setId(id);
-        initFindCorrect(videogame, id);
+        videogame.setName(name);
+        initFindCorrect(videogame, name);
     }
 
     @Override
@@ -64,6 +64,13 @@ public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, Inte
 
     @Override
     public void mockIdGeneration() {
-        Mockito.when(secuenceService.getNextSequence(Videogame.SEQUENCE_NAME)).thenReturn(getCorrectID());
+    }
+
+
+    @Test
+    public void givenNoneThenCreateIt() {
+        this.mockIdGeneration();
+        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> whenCreation(false));
+        assertEquals(AbstractServiceDTO.NEEDS_ID, exception.getMessage());
     }
 }
