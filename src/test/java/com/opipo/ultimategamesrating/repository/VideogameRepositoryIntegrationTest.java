@@ -31,54 +31,45 @@ public class VideogameRepositoryIntegrationTest {
     private MongoTemplate mongoTemplate;
 
     private Videogame videogame1 = null;
-    private Integer id1 = 1;
     private String name1 = "Name 1";
     private Videogame videogame2 = null;
-    private Integer id2 = 2;
     private String name2 = "Name 2";
 
     @Before
     public void setUp() throws Exception {
         videogame1 = new Videogame();
         videogame1.setName(name1);
-        videogame1.setId(id1);
         mongoTemplate.insert(videogame1);
 
         videogame2 = new Videogame();
         videogame2.setName(name2);
-        videogame2.setId(id2);
         mongoTemplate.insert(videogame2);
     }
 
     @Test
     public void get() {
-        Videogame actual = videogameRepository.findById(id1).get();
+        Videogame actual = videogameRepository.findById(name1).get();
         assertNotNull(actual);
         assertEquals(name1, actual.getName());
-        assertEquals(id1, actual.getId());
     }
 
     @Test
     public void save() {
         Videogame expected = new Videogame();
         String name = "Name";
-        Integer id = 3;
         expected.setName(name);
-        expected.setId(id);
         Videogame actual = videogameRepository.save(expected);
         assertNotNull(actual);
         assertEquals(name, actual.getName());
-        assertEquals(id, actual.getId());
     }
 
     @Test
     public void update() {
-        Videogame previous = videogameRepository.findById(videogame1.getId()).get();
+        Videogame previous = videogameRepository.findById(videogame1.getName()).get();
         videogame1.setName("previous");
         Videogame actual = videogameRepository.save(videogame1);
         assertNotNull(actual);
         assertEquals(videogame1.getName(), actual.getName());
-        assertEquals(videogame1.getId(), actual.getId());
     }
 
     @Test
@@ -92,9 +83,9 @@ public class VideogameRepositoryIntegrationTest {
 
     @Test
     public void delete() {
-        assertTrue(videogameRepository.existsById(id1));
-        videogameRepository.deleteById(id1);
-        assertFalse(videogameRepository.existsById(id1));
+        assertTrue(videogameRepository.existsById(name1));
+        videogameRepository.deleteById(name1);
+        assertFalse(videogameRepository.existsById(name1));
     }
 
     @Test

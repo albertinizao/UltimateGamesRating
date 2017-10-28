@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VideogameServiceImpl extends AbstractServiceDTO<Videogame, Integer> implements VideogameService {
+public class VideogameServiceImpl extends AbstractServiceDTO<Videogame, String> implements VideogameService {
     @Autowired
     private VideogameRepository videogameRepository;
 
@@ -17,19 +17,19 @@ public class VideogameServiceImpl extends AbstractServiceDTO<Videogame, Integer>
     private SequenceService sequenceService;
 
     @Override
-    protected MongoRepository<Videogame, Integer> getRepository() {
+    protected MongoRepository<Videogame, String> getRepository() {
         return videogameRepository;
     }
 
     @Override
-    protected Videogame buildElement(Integer id) {
+    protected Videogame buildElement(String name) {
         Videogame videogame = new Videogame();
-        videogame.setId(id);
+        videogame.setName(name);
         return videogame;
     }
 
     @Override
-    public Integer buildId() {
-        return sequenceService.getNextSequence(Videogame.SEQUENCE_NAME);
+    public String buildId() {
+        throw new UnsupportedOperationException(AbstractServiceDTO.NEEDS_ID);
     }
 }
