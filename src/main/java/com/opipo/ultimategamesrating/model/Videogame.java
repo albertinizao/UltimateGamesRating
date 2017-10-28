@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.List;
 
 @Document
 @ApiModel(value = "Videogame", description = "All the information about the videogame")
@@ -18,7 +19,11 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @Id
     @NotEmpty
     @ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
-    public String name;
+    private String name;
+
+    @NotEmpty
+    @ApiModelProperty(value = "Collection of all the platforms", required = true, example = "PS")
+    private List<String> platform;
 
     public String getName() {
         return name;
@@ -28,10 +33,19 @@ public class Videogame implements Comparable<Videogame>, Serializable {
         this.name = name;
     }
 
+    public List<String> getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(List<String> platform) {
+        this.platform = platform;
+    }
+
     @Override
     public int hashCode() {
         final HashCodeBuilder hcb = new HashCodeBuilder();
         hcb.append(getName());
+        hcb.append(getPlatform());
         return hcb.toHashCode();
     }
 
@@ -43,6 +57,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
         final Videogame other = (Videogame) object;
         final EqualsBuilder eqb = new EqualsBuilder();
         eqb.append(this.getName(), other.getName());
+        eqb.append(this.getPlatform(), other.getPlatform());
         return eqb.isEquals();
     }
 
@@ -50,6 +65,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     public int compareTo(Videogame other) {
         final CompareToBuilder ctb = new CompareToBuilder();
         ctb.append(this.getName(), other.getName());
+        ctb.append(this.getPlatform(), other.getPlatform());
         return ctb.toComparison();
     }
 

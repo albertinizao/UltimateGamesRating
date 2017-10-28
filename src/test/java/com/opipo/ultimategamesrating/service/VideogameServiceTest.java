@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -47,6 +49,21 @@ public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, Stri
         if (params != null && params.length > 0) {
             videogame.setName((String) params[1]);
         }
+        return videogame;
+    }
+
+    @Override
+    public Videogame buildCompleteElement(String id, Object... params) {
+        Videogame videogame = new Videogame();
+        videogame.setName(id);
+        videogame.setPlatform(Arrays.asList("Plataforma"));
+        return videogame;
+    }
+
+    @Override
+    public Videogame builPartialElement(Object... params) {
+        Videogame videogame = new Videogame();
+        videogame.setPlatform(Arrays.asList("Plataforma"));
         return videogame;
     }
 

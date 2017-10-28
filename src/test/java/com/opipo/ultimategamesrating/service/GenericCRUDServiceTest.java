@@ -6,20 +6,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import javax.validation.Validator;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
+
+    @Mock
+    protected Validator validator;
 
     protected abstract MongoRepository<T, ID> getRepository();
 
@@ -30,6 +32,10 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
     public abstract ID getIncorrectCorrectID();
 
     public abstract T buildExpectedElement(ID id, Object... params);
+
+    public abstract T buildCompleteElement(ID id, Object... params);
+
+    public abstract T builPartialElement(Object... params);
 
     public abstract void initFindCorrect(ID id);
 
@@ -134,7 +140,34 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
         ID id = getCorrectID();
         T expected = buildExpectedElement(id);
         Mockito.when(getRepository().save(expected)).thenReturn(expected);
+        Mockito.when(validator.validate(expected)).thenReturn(null);
         T actual = getService().save(expected);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void givenPartialElement2ThenUpdateIt() {
+        ID id = getCorrectID();
+        T previous = buildCompleteElement(id);
+        T partial = builPartialElement();
+        T expected = buildExpectedElement(id);
+        Mockito.when(getRepository().findById(id)).thenReturn(Optional.of(previous));
+        Mockito.when(getRepository().save(expected)).thenReturn(expected);
+        Mockito.when(validator.validate(expected)).thenReturn(null);
+        T actual = getService().update(id, expected);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void givenPartialElementThenUpdateIt() {
+        ID id = getCorrectID();
+        T previous = buildCompleteElement(id);
+        T partial = builPartialElement();
+        T expected = buildExpectedElement(id);
+        Mockito.when(getRepository().findById(id)).thenReturn(Optional.of(previous));
+        Mockito.when(getRepository().save(expected)).thenReturn(expected);
+        Mockito.when(validator.validate(expected)).thenReturn(new HashSet<>());
+        T actual = getService().update(id, expected);
         assertEquals(expected, actual);
     }
 
