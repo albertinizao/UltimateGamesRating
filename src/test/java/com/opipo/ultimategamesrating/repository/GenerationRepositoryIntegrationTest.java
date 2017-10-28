@@ -32,21 +32,21 @@ public class GenerationRepositoryIntegrationTest {
 
     private Generation generation1 = null;
     private String id1 = "Id 1";
-    private String name1 = "Name 1";
+    private Short graphicsAdjustment1 = 1;
     private Generation generation2 = null;
     private String id2 = "Id 2";
-    private String name2 = "Name 2";
+    private Short graphicsAdjustment2 = 2;
 
     @Before
     public void setUp() throws Exception {
         generation1 = new Generation();
         generation1.setId(id1);
-        generation1.setName(name1);
+        generation1.setGraphicsAdjustment(graphicsAdjustment1);
         mongoTemplate.insert(generation1);
 
         generation2 = new Generation();
         generation2.setId(id2);
-        generation2.setName(name2);
+        generation2.setGraphicsAdjustment(graphicsAdjustment2);
         mongoTemplate.insert(generation2);
     }
 
@@ -54,30 +54,30 @@ public class GenerationRepositoryIntegrationTest {
     public void get() {
         Generation actual = generationRepository.findById(id1).get();
         assertNotNull(actual);
-        assertEquals(name1, actual.getName());
+        assertEquals(graphicsAdjustment1, actual.getGraphicsAdjustment());
     }
 
     @Test
     public void save() {
         Generation expected = new Generation();
         String id = "Id";
-        String name = "Name";
+        Short graphicsAdjustment = Short.valueOf("100");
         expected.setId(id);
-        expected.setName(name);
+        expected.setGraphicsAdjustment(graphicsAdjustment);
         Generation actual = generationRepository.save(expected);
         assertNotNull(actual);
         assertEquals(id, actual.getId());
-        assertEquals(name, actual.getName());
+        assertEquals(graphicsAdjustment, actual.getGraphicsAdjustment());
     }
 
     @Test
     public void update() {
         Generation previous = generationRepository.findById(generation1.getId()).get();
-        generation1.setName("previous");
+        generation1.setGraphicsAdjustment(Short.valueOf("50"));
         Generation actual = generationRepository.save(generation1);
         assertNotNull(actual);
         assertEquals(generation1.getId(), actual.getId());
-        assertEquals(generation1.getName(), actual.getName());
+        assertEquals(generation1.getGraphicsAdjustment(), actual.getGraphicsAdjustment());
     }
 
     @Test
