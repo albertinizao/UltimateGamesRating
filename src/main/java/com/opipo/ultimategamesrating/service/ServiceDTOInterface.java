@@ -14,6 +14,8 @@ public interface ServiceDTOInterface<T, ID extends Serializable> {
 
     T save(T element);
 
+    T update(ID id, T element);
+
     void delete(T element);
 
     void delete(ID id);

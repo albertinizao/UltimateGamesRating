@@ -21,9 +21,8 @@ public class GenerationController extends AbstractCRUDController<Generation, Str
         return service;
     }
 
-    @Override
-    protected boolean checkIdFromElement(String id, Generation element) {
-        return (id == null && (element == null || element.getId() == null))
-                || (id != null && element != null && element.getId() != null && id.equals(element.getId()));
+    protected String getIdFromElement(Generation element){
+        return element.getId();
     }
+
 }
