@@ -85,6 +85,42 @@ public abstract class AbstractCRUDControllerTest<T, ID extends Serializable> {
     }
 
     @Test
+    public void givenIdAndOtherIdInElementAndTryToPatchThenGetException() {
+        ID id = getCorrectID();
+        T element = buildElement(getIncorrectID());
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> getController().partialUpdate(id, element));
+        assertTrue(exception.getMessage().contains("The id is wrong"));
+    }
+
+    @Test
+    public void givenIdAndElementWhoDoesntExistAndTryToPatchThenGetException() {
+        ID id = getCorrectID();
+        T element = buildElement(id);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> getController().partialUpdate(id, element));
+        assertTrue(exception.getMessage().contains("The element doesn't exist"));
+    }
+
+    @Test
+    public void givenIdAndElementWhoExistsAndTryToPatchThenGetSavedElement() {
+        ID id = getCorrectID();
+        T expected = buildElement(id);
+        Mockito.when(getService().find(id)).thenReturn(expected);
+        Mockito.when(getService().update(id, expected)).thenReturn(expected);
+        ResponseEntity<T> actual = getController().partialUpdate(id, expected);
+        validateResponseEntity(actual, HttpStatus.ACCEPTED, expected);
+    }
+
+    @Test
+    public void givenIdAndElementWhoExistsButNoWithIdAndTryToPatchThenGetSavedElement() {
+        ID id = getCorrectID();
+        T expected = buildElement(null);
+        Mockito.when(getService().find(id)).thenReturn(expected);
+        Mockito.when(getService().update(id, expected)).thenReturn(expected);
+        ResponseEntity<T> actual = getController().partialUpdate(id, expected);
+        validateResponseEntity(actual, HttpStatus.ACCEPTED, expected);
+    }
+
+    @Test
     public void givenIdAndOtherIdInElementAndTryToCreateThenGetException() {
         ID id = getCorrectID();
         T element = buildElement(getIncorrectID());

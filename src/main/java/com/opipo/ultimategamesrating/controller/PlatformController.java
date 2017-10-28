@@ -22,8 +22,7 @@ public class PlatformController extends AbstractCRUDController<Platform, String>
     }
 
     @Override
-    protected boolean checkIdFromElement(String name, Platform element) {
-        return (name == null && (element == null || element.getId() == null))
-                || (name != null && element != null && element.getId() != null && name.equals(element.getId()));
+    protected String getIdFromElement(Platform element){
+        return element.getId();
     }
 }

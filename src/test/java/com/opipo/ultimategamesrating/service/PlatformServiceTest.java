@@ -51,6 +51,21 @@ public class PlatformServiceTest extends GenericCRUDServiceTest<Platform, String
     }
 
     @Override
+    public Platform buildCompleteElement(String id, Object... params) {
+        Platform platform = new Platform();
+        platform.setId(id);
+        platform.setName("name");
+        return platform;
+    }
+
+    @Override
+    public Platform builPartialElement(Object... params) {
+        Platform platform = new Platform();
+        platform.setName("name");
+        return platform;
+    }
+
+    @Override
     public void initFindCorrect(String id) {
         Platform platform = new Platform();
         platform.setId(id);
