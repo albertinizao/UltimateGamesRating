@@ -3,6 +3,7 @@ spring:
         mongodb:
             uri: mongodb://root:albertinizao@ds237445.mlab.com:37445/heroku_2xkc516d
 
+user: ultimategamerating@gmail.com
 
 logging:
     level: DEBUG
