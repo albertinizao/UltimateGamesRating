@@ -18,14 +18,14 @@ import javax.validation.constraints.NotEmpty;
 public class Generation implements Comparable<Generation>{
 
     @Id
+    @NotEmpty
     @ApiModelProperty(value = "The id of the generation", required = true, example = "4ª Generation")
     private String id;
 
-    @NotEmpty
     @Min(0)
     @Max(100)
     @ApiModelProperty(value = "The adjustment percent for the graphics in this generation", required = true, example = "85")
-    public Short graphicsAdjustment;
+    public Integer graphicsAdjustment;
 
     public String getId() {
         return id;
@@ -35,11 +35,11 @@ public class Generation implements Comparable<Generation>{
         this.id = id;
     }
 
-    public Short getGraphicsAdjustment() {
+    public Integer getGraphicsAdjustment() {
         return graphicsAdjustment;
     }
 
-    public void setGraphicsAdjustment(Short graphicsAdjustment) {
+    public void setGraphicsAdjustment(Integer graphicsAdjustment) {
         this.graphicsAdjustment = graphicsAdjustment;
     }
 

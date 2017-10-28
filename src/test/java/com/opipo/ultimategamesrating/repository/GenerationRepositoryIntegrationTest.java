@@ -32,10 +32,10 @@ public class GenerationRepositoryIntegrationTest {
 
     private Generation generation1 = null;
     private String id1 = "Id 1";
-    private Short graphicsAdjustment1 = 1;
+    private Integer graphicsAdjustment1 = 1;
     private Generation generation2 = null;
     private String id2 = "Id 2";
-    private Short graphicsAdjustment2 = 2;
+    private Integer graphicsAdjustment2 = 2;
 
     @Before
     public void setUp() throws Exception {
@@ -61,7 +61,7 @@ public class GenerationRepositoryIntegrationTest {
     public void save() {
         Generation expected = new Generation();
         String id = "Id";
-        Short graphicsAdjustment = Short.valueOf("100");
+        Integer graphicsAdjustment = 100;
         expected.setId(id);
         expected.setGraphicsAdjustment(graphicsAdjustment);
         Generation actual = generationRepository.save(expected);
@@ -73,7 +73,7 @@ public class GenerationRepositoryIntegrationTest {
     @Test
     public void update() {
         Generation previous = generationRepository.findById(generation1.getId()).get();
-        generation1.setGraphicsAdjustment(Short.valueOf("50"));
+        generation1.setGraphicsAdjustment(50);
         Generation actual = generationRepository.save(generation1);
         assertNotNull(actual);
         assertEquals(generation1.getId(), actual.getId());

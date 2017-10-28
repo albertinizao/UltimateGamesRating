@@ -8,14 +8,16 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Document
 @ApiModel(value = "Videogame", description = "All the information about the videogame")
 public class Videogame implements Comparable<Videogame>, Serializable {
 
-    @ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
     @Id
+    @NotEmpty
+    @ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
     public String name;
 
     public String getName() {

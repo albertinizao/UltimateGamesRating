@@ -18,10 +18,13 @@ public class Platform implements Comparable<Platform> {
     @NotEmpty
     @ApiModelProperty(value = "The complete name of the platform", required = true, example = "Playstation 4")
     public String name;
+
     @NotEmpty
     @ApiModelProperty(value = "The generation at with this platform bellows", required = true, example = "4ª Generación")
     public String generation;
+
     @Id
+    @NotEmpty
     @ApiModelProperty(value = "The id of the platform", required = true, example = "PS4")
     private String id;
 
