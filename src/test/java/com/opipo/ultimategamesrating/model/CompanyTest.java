@@ -1,5 +1,4 @@
 package com.opipo.ultimategamesrating.model;
 
-public enum Genre {
-    RPG, ADVENTURE
+public class CompanyTest {
 }

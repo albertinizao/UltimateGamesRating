@@ -1,5 +1,5 @@
 package com.opipo.ultimategamesrating.model;
 
-public enum Genre {
-    RPG, ADVENTURE
+public enum Masterpiece {
+    FALSE,TRUE,HOLLY
 }
