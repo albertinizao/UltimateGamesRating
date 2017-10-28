@@ -55,7 +55,7 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @ApiModelProperty(value = "The name of the mains characters", required = false)
     private List<String> mainCharacters;
 
-    @ApiModelProperty(value = "The percent of trophies that you have.", required = false, example = "P75")
+    @ApiModelProperty(value = "The percent of trophies that you have.", required = false, example = "T75")
     private TrophyPercent trophy;
 
     public String getName() {
