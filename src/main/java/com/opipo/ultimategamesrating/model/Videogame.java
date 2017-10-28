@@ -29,6 +29,10 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @ApiModelProperty(value = "Collection of all the genres", required = true, example = "RPG")
     private List<Genre> genre;
 
+    @NotEmpty
+    @ApiModelProperty(value = "Information about the company", required = true)
+    private Company company;
+
     public String getName() {
         return name;
     }
