@@ -1,21 +1,16 @@
 package com.opipo.ultimategamesrating.controller;
 
-import java.io.Serializable;
-import java.util.Collection;
-
+import com.opipo.ultimategamesrating.service.ServiceDTOInterface;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.opipo.ultimategamesrating.service.ServiceDTOInterface;
-
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.Collection;
 
 public abstract class AbstractCRUDController<T, ID extends Serializable> {
 
@@ -46,7 +41,7 @@ public abstract class AbstractCRUDController<T, ID extends Serializable> {
     @ApiOperation(value = "Update", notes = "Update one element given the element")
     public @ResponseBody ResponseEntity<T> save(
             @ApiParam(value = "The identifier of the element", required = true) @PathVariable("id") ID id,
-            @ApiParam(value = "Element to update with the changes", required = true) @RequestBody T element) {
+            @ApiParam(value = "Element to update with the changes", required = true)@Valid  @RequestBody T element) {
         Assert.isTrue(checkIdFromElement(id, element), "The id is not the expected");
         Assert.notNull(getService().find(id), "The element doesn't exist");
         return new ResponseEntity<T>(getService().save(element), HttpStatus.ACCEPTED);
@@ -55,7 +50,7 @@ public abstract class AbstractCRUDController<T, ID extends Serializable> {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @ApiOperation(value = "Create", notes = "Create a element if you know the id")
     public @ResponseBody ResponseEntity<T> create(@PathVariable("id") ID id,
-                                                  @ApiParam(value = "Element to create if you want to save it directly", required = false) @RequestBody(required = false) T element) {
+                                                  @ApiParam(value = "Element to create if you want to save it directly", required = false)@Valid @RequestBody(required = false) T element) {
         Assert.isNull(getService().find(id), "The element exists now");
         if (element == null) {
             element = getService().create(id);

@@ -31,7 +31,7 @@ public class GenerationTest {
     @Test
     @DisplayName("The getter and the setter of graphicsAdjustment work well")
     public void graphicsAdjustmentAttributeTest(){
-        Short graphicsAdjustment = 3;
+        Integer graphicsAdjustment = 3;
         generation.setGraphicsAdjustment(graphicsAdjustment);
         assertEquals(graphicsAdjustment,generation.getGraphicsAdjustment());
     }
