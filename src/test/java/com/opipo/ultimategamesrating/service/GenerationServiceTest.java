@@ -45,7 +45,7 @@ public class GenerationServiceTest extends GenericCRUDServiceTest<Generation, St
         Generation generation = new Generation();
         generation.setId(id);
         if (params != null && params.length > 0) {
-            generation.setName((String) params[1]);
+            generation.setGraphicsAdjustment((Short) params[1]);
         }
         return generation;
     }
