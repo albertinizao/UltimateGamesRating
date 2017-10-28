@@ -11,12 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Document
 @ApiModel(value = "Generation", description = "All the information about the generation")
 public class Generation implements Comparable<Generation>{
 
     @Id
+    @NotEmpty
     @ApiModelProperty(value = "The id of the generation", required = true, example = "4ª Generation")
     private String id;
 
