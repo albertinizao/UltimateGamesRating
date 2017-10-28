@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/position")
-@Api(value = "REST API to manage the position of the duties")
+@RequestMapping("/generation")
+@Api(value = "REST API to manage the generations")
 public class GenerationController extends AbstractCRUDController<Generation, String> {
 
     @Autowired

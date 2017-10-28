@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
 @RestController
-@RequestMapping("/position")
-@Api(value = "REST API to manage the position of the duties")
+@RequestMapping("/videogame")
+@Api(value = "REST API to manage the videogames")
 public class VideogameController extends AbstractCRUDController<Videogame, String> {
 
     @Autowired
