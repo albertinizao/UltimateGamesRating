@@ -18,18 +18,14 @@ import javax.validation.constraints.NotEmpty;
 public class Generation implements Comparable<Generation>{
 
     @Id
-    @ApiModelProperty(value = "The id of the generation", required = true, example = "PS4")
+    @NotEmpty
+    @ApiModelProperty(value = "The id of the generation", required = true, example = "4ª Generation")
     private String id;
 
-    @NotEmpty
-    @ApiModelProperty(value = "The complete name of the generation", required = true, example = "Playstation 4")
-    public String name;
-
-    @NotEmpty
     @Min(0)
     @Max(100)
     @ApiModelProperty(value = "The adjustment percent for the graphics in this generation", required = true, example = "85")
-    public Short graphicsAdjustment;
+    public Integer graphicsAdjustment;
 
     public String getId() {
         return id;
@@ -39,19 +35,11 @@ public class Generation implements Comparable<Generation>{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Short getGraphicsAdjustment() {
+    public Integer getGraphicsAdjustment() {
         return graphicsAdjustment;
     }
 
-    public void setGraphicsAdjustment(Short graphicsAdjustment) {
+    public void setGraphicsAdjustment(Integer graphicsAdjustment) {
         this.graphicsAdjustment = graphicsAdjustment;
     }
 
@@ -59,7 +47,6 @@ public class Generation implements Comparable<Generation>{
     public int hashCode() {
         final HashCodeBuilder hcb = new HashCodeBuilder();
         hcb.append(getId());
-        hcb.append(getName());
         hcb.append(getGraphicsAdjustment());
         return hcb.toHashCode();
     }
@@ -72,7 +59,6 @@ public class Generation implements Comparable<Generation>{
         final Generation other = ( Generation ) object;
         final EqualsBuilder eqb = new EqualsBuilder();
         eqb.append(this.getId(), other.getId());
-        eqb.append(this.getName(), other.getName());
         eqb.append(this.getGraphicsAdjustment(), other.getGraphicsAdjustment());
         return eqb.isEquals();
     }
@@ -81,7 +67,6 @@ public class Generation implements Comparable<Generation>{
     public int compareTo(Generation other) {
         final CompareToBuilder ctb = new CompareToBuilder();
         ctb.append(this.getId(), other.getId());
-        ctb.append(this.getName(), other.getName());
         ctb.append(this.getGraphicsAdjustment(), other.getGraphicsAdjustment());
         return ctb.toComparison();
     }

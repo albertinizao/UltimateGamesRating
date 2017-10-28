@@ -1,9 +1,9 @@
 package com.opipo.ultimategamesrating.service;
 
-import com.opipo.ultimategamesrating.model.Videogame;
-import com.opipo.ultimategamesrating.repository.VideogameRepository;
+import com.opipo.ultimategamesrating.model.Generation;
+import com.opipo.ultimategamesrating.repository.GenerationRepository;
 import com.opipo.ultimategamesrating.service.impl.AbstractServiceDTO;
-import com.opipo.ultimategamesrating.service.impl.VideogameServiceImpl;
+import com.opipo.ultimategamesrating.service.impl.GenerationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,20 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, String> {
+public class GenerationServiceTest extends GenericCRUDServiceTest<Generation, String> {
     @InjectMocks
-    private VideogameServiceImpl service;
+    private GenerationServiceImpl service;
 
     @Mock
-    private VideogameRepository repository;
+    private GenerationRepository repository;
 
     @Override
-    protected MongoRepository<Videogame, String> getRepository() {
+    protected MongoRepository<Generation, String> getRepository() {
         return repository;
     }
 
     @Override
-    protected AbstractServiceDTO<Videogame, String> getService() {
+    protected AbstractServiceDTO<Generation, String> getService() {
         return service;
     }
 
@@ -41,25 +41,25 @@ public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, Stri
     }
 
     @Override
-    public Videogame buildExpectedElement(String name, Object... params) {
-        Videogame videogame = new Videogame();
-        videogame.setName(name);
+    public Generation buildExpectedElement(String id, Object... params) {
+        Generation generation = new Generation();
+        generation.setId(id);
         if (params != null && params.length > 0) {
-            videogame.setName((String) params[1]);
+            generation.setGraphicsAdjustment((Integer) params[1]);
         }
-        return videogame;
+        return generation;
     }
 
     @Override
-    public void initFindCorrect(String name) {
-        Videogame videogame = new Videogame();
-        videogame.setName(name);
-        initFindCorrect(videogame, name);
+    public void initFindCorrect(String id) {
+        Generation generation = new Generation();
+        generation.setId(id);
+        initFindCorrect(generation, id);
     }
 
     @Override
-    public Class<Videogame> getElementClass() {
-        return Videogame.class;
+    public Class<Generation> getElementClass() {
+        return Generation.class;
     }
 
     @Override

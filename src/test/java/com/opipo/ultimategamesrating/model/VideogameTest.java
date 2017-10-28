@@ -19,15 +19,6 @@ public class VideogameTest {
 
 
     @Test
-    @DisplayName("The getter and the setter of id work well")
-    public void idAttributeTest() {
-        Integer id = Integer.valueOf(1);
-        videogame.setId(id);
-        assertEquals(id, videogame.getId());
-    }
-
-
-    @Test
     @DisplayName("The getter and the setter of name work well")
     public void nameAttributeTest() {
         String name = Integer.toString(2);

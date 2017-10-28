@@ -1,9 +1,9 @@
 package com.opipo.ultimategamesrating.service;
 
-import com.opipo.ultimategamesrating.model.Videogame;
-import com.opipo.ultimategamesrating.repository.VideogameRepository;
+import com.opipo.ultimategamesrating.model.Platform;
+import com.opipo.ultimategamesrating.repository.PlatformRepository;
 import com.opipo.ultimategamesrating.service.impl.AbstractServiceDTO;
-import com.opipo.ultimategamesrating.service.impl.VideogameServiceImpl;
+import com.opipo.ultimategamesrating.service.impl.PlatformServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,20 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, String> {
+public class PlatformServiceTest extends GenericCRUDServiceTest<Platform, String> {
     @InjectMocks
-    private VideogameServiceImpl service;
+    private PlatformServiceImpl service;
 
     @Mock
-    private VideogameRepository repository;
+    private PlatformRepository repository;
 
     @Override
-    protected MongoRepository<Videogame, String> getRepository() {
+    protected MongoRepository<Platform, String> getRepository() {
         return repository;
     }
 
     @Override
-    protected AbstractServiceDTO<Videogame, String> getService() {
+    protected AbstractServiceDTO<Platform, String> getService() {
         return service;
     }
 
@@ -41,25 +41,25 @@ public class VideogameServiceTest extends GenericCRUDServiceTest<Videogame, Stri
     }
 
     @Override
-    public Videogame buildExpectedElement(String name, Object... params) {
-        Videogame videogame = new Videogame();
-        videogame.setName(name);
+    public Platform buildExpectedElement(String id, Object... params) {
+        Platform platform = new Platform();
+        platform.setId(id);
         if (params != null && params.length > 0) {
-            videogame.setName((String) params[1]);
+            platform.setName((String) params[1]);
         }
-        return videogame;
+        return platform;
     }
 
     @Override
-    public void initFindCorrect(String name) {
-        Videogame videogame = new Videogame();
-        videogame.setName(name);
-        initFindCorrect(videogame, name);
+    public void initFindCorrect(String id) {
+        Platform platform = new Platform();
+        platform.setId(id);
+        initFindCorrect(platform, id);
     }
 
     @Override
-    public Class<Videogame> getElementClass() {
-        return Videogame.class;
+    public Class<Platform> getElementClass() {
+        return Platform.class;
     }
 
     @Override

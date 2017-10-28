@@ -1,7 +1,7 @@
 package com.opipo.ultimategamesrating.repository;
 
 import com.opipo.ultimategamesrating.UltimateGamesRatingApplicationConfig;
-import com.opipo.ultimategamesrating.model.Videogame;
+import com.opipo.ultimategamesrating.model.Platform;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,76 +22,84 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = {UltimateGamesRatingApplicationConfig.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("test")
-public class VideogameRepositoryIntegrationTest {
+public class PlatformRepositoryIntegrationTest {
 
     @Autowired
-    private VideogameRepository videogameRepository;
+    private PlatformRepository platformRepository;
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    private Videogame videogame1 = null;
+    private Platform platform1 = null;
+    private String id1 = "Id 1";
     private String name1 = "Name 1";
-    private Videogame videogame2 = null;
+    private Platform platform2 = null;
+    private String id2 = "Id 2";
     private String name2 = "Name 2";
 
     @Before
     public void setUp() throws Exception {
-        videogame1 = new Videogame();
-        videogame1.setName(name1);
-        mongoTemplate.insert(videogame1);
+        platform1 = new Platform();
+        platform1.setId(id1);
+        platform1.setName(name1);
+        mongoTemplate.insert(platform1);
 
-        videogame2 = new Videogame();
-        videogame2.setName(name2);
-        mongoTemplate.insert(videogame2);
+        platform2 = new Platform();
+        platform2.setId(id2);
+        platform2.setName(name2);
+        mongoTemplate.insert(platform2);
     }
 
     @Test
     public void get() {
-        Videogame actual = videogameRepository.findById(name1).get();
+        Platform actual = platformRepository.findById(id1).get();
         assertNotNull(actual);
         assertEquals(name1, actual.getName());
     }
 
     @Test
     public void save() {
-        Videogame expected = new Videogame();
+        Platform expected = new Platform();
+        String id = "Id";
         String name = "Name";
+        expected.setId(id);
         expected.setName(name);
-        Videogame actual = videogameRepository.save(expected);
+        Platform actual = platformRepository.save(expected);
         assertNotNull(actual);
+        assertEquals(id, actual.getId());
         assertEquals(name, actual.getName());
     }
 
     @Test
     public void update() {
-        Videogame previous = videogameRepository.findById(videogame1.getName()).get();
-        videogame1.setName("previous");
-        Videogame actual = videogameRepository.save(videogame1);
+        Platform previous = platformRepository.findById(platform1.getId()).get();
+        platform1.setName("previous");
+        Platform actual = platformRepository.save(platform1);
         assertNotNull(actual);
-        assertEquals(videogame1.getName(), actual.getName());
+        assertEquals(platform1.getId(), actual.getId());
+        assertEquals(platform1.getName(), actual.getName());
     }
 
     @Test
     public void list() {
-        Collection<Videogame> actual = videogameRepository.findAll();
+        Collection<Platform> actual = platformRepository.findAll();
         assertEquals(2, actual.size());
-        List<Videogame> videogames = Arrays.asList(videogame1, videogame2);
-        assertTrue(actual.stream().allMatch(p -> videogames.contains(p)));
+        List<Platform> generations = Arrays.asList(platform1, platform2);
+        assertTrue(actual.stream().allMatch(p -> generations.contains(p)));
 
     }
 
     @Test
     public void delete() {
-        assertTrue(videogameRepository.existsById(name1));
-        videogameRepository.deleteById(name1);
-        assertFalse(videogameRepository.existsById(name1));
+        assertTrue(platformRepository.existsById(id1));
+        platformRepository.deleteById(id1);
+        assertFalse(platformRepository.existsById(id1));
     }
 
     @Test
     public void deleteAll() {
-        assertTrue(0L < videogameRepository.count());
-        videogameRepository.deleteAll();
-        assertEquals(0L, videogameRepository.count());
+        assertTrue(0L < platformRepository.count());
+        platformRepository.deleteAll();
+        assertEquals(0L, platformRepository.count());
     }
 }

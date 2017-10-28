@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
 @RestController
-@RequestMapping("/position")
-@Api(value = "REST API to manage the position of the duties")
-public class VideogameController extends AbstractCRUDController<Videogame, Integer> {
+@RequestMapping("/videogame")
+@Api(value = "REST API to manage the videogames")
+public class VideogameController extends AbstractCRUDController<Videogame, String> {
 
     @Autowired
     private VideogameService service;
 
     @Override
-    protected ServiceDTOInterface<Videogame, Integer> getService() {
+    protected ServiceDTOInterface<Videogame, String> getService() {
         return service;
     }
 
     @Override
-    protected boolean checkIdFromElement(Integer id, Videogame element) {
-        return (id == null && (element == null || element.getId() == null))
-                || (id != null && element != null && element.getId() != null && id.equals(element.getId()));
+    protected boolean checkIdFromElement(String name, Videogame element) {
+        return (name == null && (element == null || element.getName() == null))
+                || (name != null && element != null && element.getName() != null && name.equals(element.getName()));
     }
 }
