@@ -25,6 +25,10 @@ public class Videogame implements Comparable<Videogame>, Serializable {
     @ApiModelProperty(value = "Collection of all the platforms", required = true, example = "PS")
     private List<String> platform;
 
+    @NotEmpty
+    @ApiModelProperty(value = "Collection of all the genres", required = true, example = "RPG")
+    private List<Genre> genre;
+
     public String getName() {
         return name;
     }
@@ -39,6 +43,14 @@ public class Videogame implements Comparable<Videogame>, Serializable {
 
     public void setPlatform(List<String> platform) {
         this.platform = platform;
+    }
+
+    public List<Genre> getGenre() {
+        return genre;
+    }
+
+    public void setGenre(List<Genre> genre) {
+        this.genre = genre;
     }
 
     @Override
