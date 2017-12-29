@@ -4,6 +4,9 @@
 .settings
 .idea
 target
+src/main/resources/dist
+src/main/resources/e2e
+src/main/resources/node_modules
 /converter.iml
 
 # Compiled class file

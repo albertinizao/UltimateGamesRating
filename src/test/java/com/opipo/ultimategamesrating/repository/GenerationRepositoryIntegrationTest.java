@@ -72,7 +72,7 @@ public class GenerationRepositoryIntegrationTest {
 
     @Test
     public void update() {
-        Generation previous = generationRepository.findById(generation1.getId()).get();
+        generationRepository.findById(generation1.getId()).get();
         generation1.setGraphicsAdjustment(50);
         Generation actual = generationRepository.save(generation1);
         assertNotNull(actual);

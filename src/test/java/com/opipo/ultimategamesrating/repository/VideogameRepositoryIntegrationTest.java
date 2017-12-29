@@ -65,7 +65,7 @@ public class VideogameRepositoryIntegrationTest {
 
     @Test
     public void update() {
-        Videogame previous = videogameRepository.findById(videogame1.getName()).get();
+        videogameRepository.findById(videogame1.getName()).get();
         videogame1.setName("previous");
         Videogame actual = videogameRepository.save(videogame1);
         assertNotNull(actual);
