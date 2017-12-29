@@ -149,7 +149,7 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
     public void givenPartialElement2ThenUpdateIt() {
         ID id = getCorrectID();
         T previous = buildCompleteElement(id);
-        T partial = builPartialElement();
+        builPartialElement();
         T expected = buildExpectedElement(id);
         Mockito.when(getRepository().findById(id)).thenReturn(Optional.of(previous));
         Mockito.when(getRepository().save(expected)).thenReturn(expected);
@@ -162,7 +162,7 @@ public abstract class GenericCRUDServiceTest<T, ID extends Serializable> {
     public void givenPartialElementThenUpdateIt() {
         ID id = getCorrectID();
         T previous = buildCompleteElement(id);
-        T partial = builPartialElement();
+        builPartialElement();
         T expected = buildExpectedElement(id);
         Mockito.when(getRepository().findById(id)).thenReturn(Optional.of(previous));
         Mockito.when(getRepository().save(expected)).thenReturn(expected);

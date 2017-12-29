@@ -1,7 +1,11 @@
 package com.opipo.ultimategamesrating.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -9,195 +13,198 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @Document
 @ApiModel(value = "Videogame", description = "All the information about the videogame")
 public class Videogame implements Comparable<Videogame>, Serializable {
 
-    @Id
-    @NotEmpty
-    @ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
-    private String name;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5724562590990447034L;
 
-    @NotEmpty
-    @ApiModelProperty(value = "Collection of all the platforms", required = true, example = "PS")
-    private List<String> platform;
+	@Id
+	@NotEmpty
+	@ApiModelProperty(value = "The name of the game", required = true, example = "Final Fantasy VII")
+	private String name;
 
-    @NotEmpty
-    @ApiModelProperty(value = "Collection of all the genres", required = true, example = "RPG")
-    private List<Genre> genre;
+	@NotEmpty
+	@ApiModelProperty(value = "Collection of all the platforms", required = true, example = "PS")
+	private List<String> platform;
 
-    @ApiModelProperty(value = "Information about the company", required = false)
-    private Company company;
+	@NotEmpty
+	@ApiModelProperty(value = "Collection of all the genres", required = true, example = "RPG")
+	private List<Genre> genre;
 
-    @NotEmpty
-    @ApiModelProperty(value = "If is a masterpiece or not. FALSE, TRUE or HOLLY", required = true, example = "FALSE")
-    private Masterpiece masterpiece;
+	@ApiModelProperty(value = "Information about the company", required = false)
+	private Company company;
 
-    @NotEmpty
-    @ApiModelProperty(value = "If the game was completed or not", required = true, example = "false")
-    private Boolean completed;
+	@NotEmpty
+	@ApiModelProperty(value = "If is a masterpiece or not. FALSE, TRUE or HOLLY", required = true, example = "FALSE")
+	private Masterpiece masterpiece;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @ApiModelProperty(value = "The date in witch the game was completed", required = true, example = "2017-01-30")
-    private Date completedDate;
+	@NotEmpty
+	@ApiModelProperty(value = "If the game was completed or not", required = true, example = "false")
+	private Boolean completed;
 
-    @ApiModelProperty(value = "The time in hours that you used to completed the game", required = false, example = "23")
-    private Integer timeUsed;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@ApiModelProperty(value = "The date in witch the game was completed", required = true, example = "2017-01-30")
+	private Date completedDate;
 
-    @ApiModelProperty(value = "The name of the license", required = false, example = "Starwars")
-    private String license;
+	@ApiModelProperty(value = "The time in hours that you used to completed the game", required = false, example = "23")
+	private Integer timeUsed;
 
-    @ApiModelProperty(value = "The name of the mains characters", required = false)
-    private List<String> mainCharacters;
+	@ApiModelProperty(value = "The name of the license", required = false, example = "Starwars")
+	private String license;
 
-    @ApiModelProperty(value = "The percent of trophies that you have.", required = false, example = "T75")
-    private TrophyPercent trophy;
+	@ApiModelProperty(value = "The name of the mains characters", required = false)
+	private List<String> mainCharacters;
 
-    public String getName() {
-        return name;
-    }
+	@ApiModelProperty(value = "The percent of trophies that you have.", required = false, example = "T75")
+	private TrophyPercent trophy;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public List<String> getPlatform() {
-        return platform;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPlatform(List<String> platform) {
-        this.platform = platform;
-    }
+	public List<String> getPlatform() {
+		return platform;
+	}
 
-    public List<Genre> getGenre() {
-        return genre;
-    }
+	public void setPlatform(List<String> platform) {
+		this.platform = platform;
+	}
 
-    public void setGenre(List<Genre> genre) {
-        this.genre = genre;
-    }
+	public List<Genre> getGenre() {
+		return genre;
+	}
 
-    public Company getCompany() {
-        return company;
-    }
+	public void setGenre(List<Genre> genre) {
+		this.genre = genre;
+	}
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+	public Company getCompany() {
+		return company;
+	}
 
-    public Masterpiece getMasterpiece() {
-        return masterpiece;
-    }
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 
-    public void setMasterpiece(Masterpiece masterpiece) {
-        this.masterpiece = masterpiece;
-    }
+	public Masterpiece getMasterpiece() {
+		return masterpiece;
+	}
 
-    public Boolean getCompleted() {
-        return completed;
-    }
+	public void setMasterpiece(Masterpiece masterpiece) {
+		this.masterpiece = masterpiece;
+	}
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
+	public Boolean getCompleted() {
+		return completed;
+	}
 
-    public Date getCompletedDate() {
-        return completedDate==null?null:new Date(completedDate.getTime());
-    }
+	public void setCompleted(Boolean completed) {
+		this.completed = completed;
+	}
 
-    public void setCompletedDate(Date completedDate) {
-        this.completedDate = completedDate==null?null:new Date(completedDate.getTime());
-    }
+	public Date getCompletedDate() {
+		return completedDate == null ? null : new Date(completedDate.getTime());
+	}
 
-    public Integer getTimeUsed() {
-        return timeUsed;
-    }
+	public void setCompletedDate(Date completedDate) {
+		this.completedDate = completedDate == null ? null : new Date(completedDate.getTime());
+	}
 
-    public void setTimeUsed(Integer timeUsed) {
-        this.timeUsed = timeUsed;
-    }
+	public Integer getTimeUsed() {
+		return timeUsed;
+	}
 
-    public String getLicense() {
-        return license;
-    }
+	public void setTimeUsed(Integer timeUsed) {
+		this.timeUsed = timeUsed;
+	}
 
-    public void setLicense(String license) {
-        this.license = license;
-    }
+	public String getLicense() {
+		return license;
+	}
 
-    public List<String> getMainCharacters() {
-        return mainCharacters;
-    }
+	public void setLicense(String license) {
+		this.license = license;
+	}
 
-    public void setMainCharacters(List<String> mainCharacters) {
-        this.mainCharacters = mainCharacters;
-    }
+	public List<String> getMainCharacters() {
+		return mainCharacters;
+	}
 
-    public TrophyPercent getTrophy() {
-        return trophy;
-    }
+	public void setMainCharacters(List<String> mainCharacters) {
+		this.mainCharacters = mainCharacters;
+	}
 
-    public void setTrophy(TrophyPercent trophy) {
-        this.trophy = trophy;
-    }
+	public TrophyPercent getTrophy() {
+		return trophy;
+	}
 
-    @Override
-    public int hashCode() {
-        final HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(getName());
-        hcb.append(getPlatform());
-        hcb.append(getGenre());
-        hcb.append(getCompany());
-        hcb.append(getMasterpiece());
-        hcb.append(getCompleted());
-        hcb.append(getCompletedDate());
-        hcb.append(getTimeUsed());
-        hcb.append(getLicense());
-        hcb.append(getMainCharacters());
-        hcb.append(getTrophy());
-        return hcb.toHashCode();
-    }
+	public void setTrophy(TrophyPercent trophy) {
+		this.trophy = trophy;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Videogame)) {
-            return false;
-        }
-        final Videogame other = (Videogame) object;
-        final EqualsBuilder eqb = new EqualsBuilder();
-        eqb.append(this.getName(), other.getName());
-        eqb.append(this.getPlatform(), other.getPlatform());
-        eqb.append(this.getGenre(), other.getGenre());
-        eqb.append(this.getCompany(), other.getCompany());
-        eqb.append(this.getMasterpiece(), other.getMasterpiece());
-        eqb.append(this.getCompleted(), other.getCompleted());
-        eqb.append(this.getCompletedDate(), other.getCompletedDate());
-        eqb.append(this.getTimeUsed(), other.getTimeUsed());
-        eqb.append(this.getLicense(), other.getLicense());
-        eqb.append(this.getMainCharacters(), other.getMainCharacters());
-        eqb.append(this.getTrophy(), other.getTrophy());
-        return eqb.isEquals();
-    }
+	@Override
+	public int hashCode() {
+		final HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(getName());
+		hcb.append(getPlatform());
+		hcb.append(getGenre());
+		hcb.append(getCompany());
+		hcb.append(getMasterpiece());
+		hcb.append(getCompleted());
+		hcb.append(getCompletedDate());
+		hcb.append(getTimeUsed());
+		hcb.append(getLicense());
+		hcb.append(getMainCharacters());
+		hcb.append(getTrophy());
+		return hcb.toHashCode();
+	}
 
-    @Override
-    public int compareTo(Videogame other) {
-        final CompareToBuilder ctb = new CompareToBuilder();
-        ctb.append(this.getName(), other.getName());
-        ctb.append(this.getPlatform(), other.getPlatform());
-        ctb.append(this.getGenre(), other.getGenre());
-        ctb.append(this.getCompany(), other.getCompany());
-        ctb.append(this.getMasterpiece(), other.getMasterpiece());
-        ctb.append(this.getCompleted(), other.getCompleted());
-        ctb.append(this.getCompletedDate(), other.getCompletedDate());
-        ctb.append(this.getTimeUsed(), other.getTimeUsed());
-        ctb.append(this.getLicense(), other.getLicense());
-        ctb.append(this.getMainCharacters(), other.getMainCharacters());
-        ctb.append(this.getTrophy(), other.getTrophy());
-        return ctb.toComparison();
-    }
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof Videogame)) {
+			return false;
+		}
+		final Videogame other = (Videogame) object;
+		final EqualsBuilder eqb = new EqualsBuilder();
+		eqb.append(this.getName(), other.getName());
+		eqb.append(this.getPlatform(), other.getPlatform());
+		eqb.append(this.getGenre(), other.getGenre());
+		eqb.append(this.getCompany(), other.getCompany());
+		eqb.append(this.getMasterpiece(), other.getMasterpiece());
+		eqb.append(this.getCompleted(), other.getCompleted());
+		eqb.append(this.getCompletedDate(), other.getCompletedDate());
+		eqb.append(this.getTimeUsed(), other.getTimeUsed());
+		eqb.append(this.getLicense(), other.getLicense());
+		eqb.append(this.getMainCharacters(), other.getMainCharacters());
+		eqb.append(this.getTrophy(), other.getTrophy());
+		return eqb.isEquals();
+	}
+
+	@Override
+	public int compareTo(Videogame other) {
+		final CompareToBuilder ctb = new CompareToBuilder();
+		ctb.append(this.getName(), other.getName());
+		ctb.append(this.getPlatform(), other.getPlatform());
+		ctb.append(this.getGenre(), other.getGenre());
+		ctb.append(this.getCompany(), other.getCompany());
+		ctb.append(this.getMasterpiece(), other.getMasterpiece());
+		ctb.append(this.getCompleted(), other.getCompleted());
+		ctb.append(this.getCompletedDate(), other.getCompletedDate());
+		ctb.append(this.getTimeUsed(), other.getTimeUsed());
+		ctb.append(this.getLicense(), other.getLicense());
+		ctb.append(this.getMainCharacters(), other.getMainCharacters());
+		ctb.append(this.getTrophy(), other.getTrophy());
+		return ctb.toComparison();
+	}
 }

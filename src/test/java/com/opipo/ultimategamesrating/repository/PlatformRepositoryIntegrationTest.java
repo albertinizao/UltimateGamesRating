@@ -72,7 +72,7 @@ public class PlatformRepositoryIntegrationTest {
 
     @Test
     public void update() {
-        Platform previous = platformRepository.findById(platform1.getId()).get();
+        platformRepository.findById(platform1.getId()).get();
         platform1.setName("previous");
         Platform actual = platformRepository.save(platform1);
         assertNotNull(actual);
