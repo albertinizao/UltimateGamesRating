@@ -25,9 +25,9 @@
 		<guava.version>23.0</guava.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<junit.version>4.12</junit.version>
-		<junit.jupiter.version>5.0.0-M4</junit.jupiter.version>
-		<junit.platform.version>1.0.0-M4</junit.platform.version>
-		<junit.vintage.version>${junit.version}.0-M4</junit.vintage.version>
+		<junit.jupiter.version>5.0.0</junit.jupiter.version>
+		<junit.platform.version>1.0.0</junit.platform.version>
+		<junit.vintage.version>${junit.version}.0</junit.vintage.version>
 		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 		<java.version>1.8</java.version>
 	</properties>
@@ -171,66 +171,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
-				<executions>
-					<execution>
-						<id>ng-install</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<workingDirectory>src/main/webapp</workingDirectory>
-							<executable>npm</executable>
-							<arguments>
-								<argument>install</argument>
-							</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>ng-build</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<workingDirectory>src/main/webapp</workingDirectory>
-							<executable>ng</executable>
-							<arguments>
-								<argument>build</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<nonFilteredFileExtensions>
-						<nonFilteredFileExtension>html</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
-						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-						<nonFilteredFileExtension>eot</nonFilteredFileExtension>
-						<nonFilteredFileExtension>swf</nonFilteredFileExtension>
-						<nonFilteredFileExtension>ico</nonFilteredFileExtension>
-					</nonFilteredFileExtensions>
-				</configuration>
-			</plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>src/main/webapp/dist/</directory>
-				<targetPath>META-INF/resources/</targetPath>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
